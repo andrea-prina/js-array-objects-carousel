@@ -13,6 +13,10 @@
     padding-right: 1.5rem;
 }
 
-.carousel-img.active {
+.carousel-slide {
+    display: none;
+}
+
+.carousel-slide.active {
     display: block;
 }

@@ -29,32 +29,75 @@ const images = [
 ];
 
 
-const carouselImageWrapper = document.querySelector(".carousel-wrapper");
-const carouselText = document.querySelector(".carousel-text");
+const carouselWrapper = document.querySelector(".carousel-wrapper");
 const nextButton = document.getElementById("next-button");
 const prevButton = document.getElementById("prev-button");
 
+
 let activeImageIndex = 0;
 
+images.forEach((element, index) => {
 
-images.forEach(element => {
+    const carouselSlide = document.createElement("div");
+    carouselSlide.classList.add("carousel-slide");
+
     const carouselMainImage = document.createElement("img");
     carouselMainImage.setAttribute("src", element.url);
     carouselMainImage.classList.add("carousel-img");
-    carouselImageWrapper.append(carouselMainImage);
+
+    const carouselMainText = document.createElement("div");
+    carouselMainText.classList.add("carousel-text");
+    carouselMainText.innerHTML = `<h1>${element.title}</h1>
+                                    <h5>${element.description}</h5>`;
+
+    carouselSlide.append(carouselMainImage, carouselMainText);
+
+    if(index === activeImageIndex){
+        carouselSlide.classList.add("active");
+        carouselSlide.classList.add("active");
+    }
+
+    carouselWrapper.append(carouselSlide);
+
+
 });
 
 
 
 nextButton.addEventListener("click", function(){
-    changeCarouselImage()
+    changeCarouselImage(carouselWrapper, true);
 })
 
 prevButton.addEventListener("click", function(){
-    changeCarouselImage()
+    changeCarouselImage(carouselWrapper, false);
 })
 
 
-function changeCarouselImage(){
-    console.log("CLICK");
+function changeCarouselImage(htmlElement, advanceToNext){
+
+    htmlElement.children[activeImageIndex].classList.remove("active");
+
+    if(advanceToNext){
+        activeImageIndex++;
+
+        if(activeImageIndex === images.length){
+            activeImageIndex = 0;
+        }
+
+    } else {
+        activeImageIndex--;
+
+        if(activeImageIndex < 0){
+            activeImageIndex = images.length - 1;
+        }
+    }
+
+    console.log(activeImageIndex);
+
+
+
+
+    // Aggiungere la classe active al nuovo elemento
+    htmlElement.children[activeImageIndex].classList.add("active");
+
 }
