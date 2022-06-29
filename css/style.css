@@ -31,3 +31,10 @@
 .col.active > .thumb-img {
     opacity: 100%;
 }
+
+.overlay-buttons {
+    position: absolute;
+    bottom: 4.5rem;
+    left: 1rem;
+    right: 1rem;
+}
