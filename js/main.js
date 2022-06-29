@@ -27,3 +27,34 @@ const images = [
         description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.'
     },
 ];
+
+
+const carouselImageWrapper = document.querySelector(".carousel-wrapper");
+const carouselText = document.querySelector(".carousel-text");
+const nextButton = document.getElementById("next-button");
+const prevButton = document.getElementById("prev-button");
+
+let activeImageIndex = 0;
+
+
+images.forEach(element => {
+    const carouselMainImage = document.createElement("img");
+    carouselMainImage.setAttribute("src", element.url);
+    carouselMainImage.classList.add("carousel-img");
+    carouselImageWrapper.append(carouselMainImage);
+});
+
+
+
+nextButton.addEventListener("click", function(){
+    changeCarouselImage()
+})
+
+prevButton.addEventListener("click", function(){
+    changeCarouselImage()
+})
+
+
+function changeCarouselImage(){
+    console.log("CLICK");
+}
