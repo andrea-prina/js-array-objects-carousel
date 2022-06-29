@@ -79,25 +79,17 @@ function changeCarouselImage(htmlElement, advanceToNext){
 
     if(advanceToNext){
         activeImageIndex++;
-
         if(activeImageIndex === images.length){
             activeImageIndex = 0;
         }
 
     } else {
         activeImageIndex--;
-
         if(activeImageIndex < 0){
             activeImageIndex = images.length - 1;
         }
     }
 
-    console.log(activeImageIndex);
-
-
-
-
-    // Aggiungere la classe active al nuovo elemento
     htmlElement.children[activeImageIndex].classList.add("active");
 
 }
