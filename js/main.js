@@ -30,6 +30,7 @@ const images = [
 
 
 const carouselWrapper = document.querySelector(".carousel-wrapper");
+const thumbnails = document.querySelector(".thumbnails");
 const nextButton = document.getElementById("next-button");
 const prevButton = document.getElementById("prev-button");
 
@@ -38,6 +39,7 @@ let activeImageIndex = 0;
 
 images.forEach((element, index) => {
 
+    // Create main slide (image + text)
     const carouselSlide = document.createElement("div");
     carouselSlide.classList.add("carousel-slide");
 
@@ -52,30 +54,42 @@ images.forEach((element, index) => {
 
     carouselSlide.append(carouselMainImage, carouselMainText);
 
+    // Create thumbnail
+    const thumbWrapper = document.createElement("div");
+    thumbWrapper.classList.add("col");
+
+    const thumbImage = document.createElement("img");
+    thumbImage.classList.add("thumb-img");
+    thumbImage.setAttribute("src", element.url);
+
     if(index === activeImageIndex){
         carouselSlide.classList.add("active");
-        carouselSlide.classList.add("active");
+        thumbWrapper.classList.add("active");
     }
 
     carouselWrapper.append(carouselSlide);
-
+    thumbWrapper.append(thumbImage);
+    thumbnails.append(thumbWrapper);
 
 });
 
 
 
 nextButton.addEventListener("click", function(){
-    changeCarouselImage(carouselWrapper, true);
+    changeCarouselImage(carouselWrapper, thumbnails, true);
 })
 
 prevButton.addEventListener("click", function(){
-    changeCarouselImage(carouselWrapper, false);
+    changeCarouselImage(carouselWrapper, thumbnails, false);
 })
 
 
-function changeCarouselImage(htmlElement, advanceToNext){
+function changeCarouselImage(slideElement, thumbElement, advanceToNext){
 
-    htmlElement.children[activeImageIndex].classList.remove("active");
+    slideElement.children[activeImageIndex].classList.remove("active");
+    thumbElement.children[activeImageIndex].classList.remove("active");
+
+
 
     if(advanceToNext){
         activeImageIndex++;
@@ -90,6 +104,7 @@ function changeCarouselImage(htmlElement, advanceToNext){
         }
     }
 
-    htmlElement.children[activeImageIndex].classList.add("active");
+    slideElement.children[activeImageIndex].classList.add("active");
+    thumbElement.children[activeImageIndex].classList.add("active");
 
 }
